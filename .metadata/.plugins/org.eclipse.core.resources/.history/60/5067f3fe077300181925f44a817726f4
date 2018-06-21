@@ -1,0 +1,56 @@
+package page;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import static org.awaitility.Awaitility.*;
+import static org.hamcrest.Matchers.*;
+
+import java.util.concurrent.TimeUnit;
+
+public class LoginPage {
+	
+	private WebDriver driver;
+	
+	@FindBy(name="mobile_number")
+	private WebElement phoneNumber;
+	
+	@FindBy(css="button[type='submit']")
+	private WebElement btnSubmit;
+	
+	@FindBy(css="input[name='otp_code']")
+	private WebElement inputOtp;
+	
+	
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public void inputPhoneNumber(String phoneNumber) {
+		this.phoneNumber.sendKeys(phoneNumber);
+	}
+	
+	public void clickSendOtpCode() {
+	    await("Wait for button Login to be enabled").
+	       atMost(20,TimeUnit.SECONDS).
+	          until(this.btnSubmit::getText,is("Gửi mã xác minh"));
+		this.btnSubmit.click();
+	}
+	
+	public void inputOTPCode(String otpCode) {
+	    await("Wait for OTP field to be shown").atMost(20,TimeUnit.SECONDS).until(() 
+	    		-> this.inputOtp.isDisplayed());
+        this.inputOtp.sendKeys(otpCode);
+	}
+	
+	public void clickLoginButton() {
+	    await("Wait for button Login to be enabled").
+	      atMost(20,TimeUnit.SECONDS).
+	        until(this.btnSubmit::getText,is("Đăng nhập"));
+        this.btnSubmit.click();
+	}
+
+}

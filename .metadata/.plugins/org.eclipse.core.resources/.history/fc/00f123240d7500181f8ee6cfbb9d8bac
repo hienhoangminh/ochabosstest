@@ -1,0 +1,118 @@
+package page;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utils.Utils;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+import static org.hamcrest.Matchers.is;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class HomePage {
+
+	private static final Logger log = LogManager.getLogger(HomePage.class.getName());
+	
+	private WebDriver driver;
+	
+	private Actions action;
+	
+	private JavascriptExecutor js;
+	
+	@FindBy(xpath="//div[@class='time-display']")
+	private WebElement labelTime;
+	
+	@FindBy(css=".control-group.user-info")
+	private WebElement userInfo;
+	
+	@FindBy(css="#user-info-dropdown-id .owner-name")
+	private WebElement ownerName;
+	
+	@FindBy(css="#branch_select_id .dropdown-content div")
+	private List<WebElement> brandList;
+	
+	@FindBy(css="#branch_select_id .dropdown-content div:nth-of-type(2)")
+	private WebElement firstBrand;
+
+	@FindBy(id="daily-sales-summary-panel-chart")
+	private WebElement dailySaleChart;
+
+	
+	@FindBy(xpath="//button[@data-target='#logout-modal-id']")
+	private WebElement logoutButton;
+	
+	@FindBy(xpath="//button[@data-dismiss='modal'][contains(.,'Đăng xuất')]")
+	private WebElement confirmLogoutButton;
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		this.action = new Actions(driver);
+		this.js = (JavascriptExecutor) driver;
+	}
+	
+	public void clickOnUserInfo() {
+		try {
+			await("Wait for button Login to be enabled").atMost(20, TimeUnit.SECONDS).until(
+					() -> this.userInfo.isEnabled());
+		  	action.moveToElement(userInfo).click().perform();
+	        log.info("Click on the user profile icon");
+		}catch(Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+	
+	public void assertUserName(String name) {
+        log.info("Verify the username");
+      	await("Wait for user info is loaded").atMost(20, TimeUnit.SECONDS).until(
+				() -> this.ownerName.isDisplayed());
+		assertThat(this.ownerName.getText()).isEqualToIgnoringCase(name);
+	}
+	
+	public void clickOnLogout() {
+		try {
+			await("Wait for button Login to be enabled").
+			     atMost(20, TimeUnit.SECONDS).until(this.logoutButton::getText,
+							is("Đăng xuất"));
+			this.logoutButton.click();
+	        log.info("Click on logout button");
+		}catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+	    
+	public LoginPage clickConfirmLogout() {
+		try {
+			await("Wait for button Login to be enabled").
+		     atMost(20, TimeUnit.SECONDS).until(this.confirmLogoutButton::getText,
+						is("Đăng xuất"));
+			this.confirmLogoutButton.click();
+	        log.info("Click on logout button");
+	        return new LoginPage(driver);
+		}catch (Exception e) {
+			log.error(e.getMessage());
+			return null;
+		}
+
+	}
+	
+	public void selectFirstBrand() {
+		await("Wait for brand list to be shown").
+	     atMost(20, TimeUnit.SECONDS).until(() -> this.brandList.size()==9);
+        js.executeScript("arguments[0].click();", this.firstBrand);
+	}
+	
+	public boolean verifyDailySales() {
+		await("Wait for brand list to be shown").
+	     atMost(20, TimeUnit.SECONDS).until(() -> this.dailySaleChart.isDisplayed());
+		return Utils.verifyChart(driver, "baseline//daily_sales.png", dailySaleChart);
+	}
+	
+	
+}

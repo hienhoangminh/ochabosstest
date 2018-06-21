@@ -1,0 +1,7 @@
+package snippet;
+
+public class Snippet {
+	await("Wait for brand list to be shown").
+	//	       atMost(20, TimeUnit.SECONDS).until(() -> this.dailySaleChart.isDisplayed());
+}
+

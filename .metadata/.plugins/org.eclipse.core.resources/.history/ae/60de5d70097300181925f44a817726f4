@@ -1,0 +1,38 @@
+package testcases;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import page.HomePage;
+import page.LoginPage;
+
+public class TestLogin {
+	
+    private WebDriver driver;
+
+	@BeforeClass
+	public static void setUpClass() {
+		WebDriverManager.chromedriver().setup();
+	}
+	
+	@BeforeTest
+	public void setUp() throws Exception {
+        driver = new ChromeDriver();
+        LoginPage lp = new LoginPage(driver);
+	}
+
+	@Test
+	public void testLogin() throws Exception {
+        
+	}
+
+	@AfterTest
+	public void tearDown() throws Exception {
+
+	}
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<!-- Define appenders -->
+	<Properties>
+		<Property name="basePath">./logs</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="File">
+			<FileName>${basePath}/app.log</FileName>
+			<FilePattern>${basePath}/app_%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
+			<PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level %c{1} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="500 KB" />
+			</Policies>
+		</RollingFile>
+
+		<Console name="Console">
+			<!-- %d{HH:mm:ss.SSS}: time when log happens. 5 is for space, - is for 
+				padding. %c : category. %msg : message -->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %c{1} - %msg%n" />
+		</Console>
+	</Appenders>
+	<!-- Define logger -->
+	<Loggers>
+		<!-- Root logger -->
+		<Root level="trace">
+			<!-- Which appenders to be used -->
+			<!-- <AppenderRef ref="Console" /> -->
+			<AppenderRef ref="File" />
+		</Root>
+		<Logger name="page.HomePage" level="all" additivity="false">
+			<AppenderRef ref="File" />
+		</Logger>
+		<Logger name="page.LoginPage" level="all" additivity="false">
+			<AppenderRef ref="File" />
+		</Logger>
+	</Loggers>
+</Configuration>

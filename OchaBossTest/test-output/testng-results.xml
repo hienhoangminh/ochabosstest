@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="7443" started-at="2018-06-21T07:26:20Z" finished-at="2018-06-21T07:26:27Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="7443" started-at="2018-06-21T07:26:20Z" finished-at="2018-06-21T07:26:27Z">
+      <class name="testcase.TestLoginOchaBoss">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9]" name="beforeTest" is-config="true" duration-ms="9" started-at="2018-06-21T07:26:20Z" finished-at="2018-06-21T07:26:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9]" name="beforeMethod" is-config="true" duration-ms="4514" started-at="2018-06-21T07:26:20Z" finished-at="2018-06-21T07:26:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="loginOchaBoss()[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9]" name="loginOchaBoss" duration-ms="2585" started-at="2018-06-21T07:26:24Z" finished-at="2018-06-21T07:26:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginOchaBoss -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9]" name="afterMethod" is-config="true" duration-ms="183" started-at="2018-06-21T07:26:27Z" finished-at="2018-06-21T07:26:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=loginOchaBoss status=SUCCESS method=TestLoginOchaBoss.loginOchaBoss()[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:testcase.TestLoginOchaBoss@491cc5c9]" name="afterTest" is-config="true" duration-ms="139" started-at="2018-06-21T07:26:27Z" finished-at="2018-06-21T07:26:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- testcase.TestLoginOchaBoss -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,13 @@
+package test;
+
+import org.openqa.selenium.WebDriver;
+
+public class LoginToOchaBoss {
+
+	public static void main(String[] args) {
+		WebDriver driver;
+		System.setProperty("webdriver.chrome.driver", "/Users/hoanghien/drivers/chromedriver");
+		
+	}
+	
+}

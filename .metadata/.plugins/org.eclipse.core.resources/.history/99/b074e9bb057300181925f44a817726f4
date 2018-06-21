@@ -1,0 +1,39 @@
+package page;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class HomePage {
+
+	private WebDriver driver;
+	
+	@FindBy(xpath="//div[@class='time-display']")
+	private WebElement labelTime;
+	
+	@FindBy(css="button[type='submit']")
+	private WebElement btnSubmit;
+	
+	@FindBy(css="input[name='otp_code']")
+	private WebElement inputOtp;
+	
+	
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public void assertLoginSucessfully() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+		assertThat(labelTime).isNotNull();
+	}
+	
+}

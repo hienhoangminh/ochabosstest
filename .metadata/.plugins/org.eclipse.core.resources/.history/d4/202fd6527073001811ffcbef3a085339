@@ -1,0 +1,43 @@
+package testcases;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import drivermanager.DriverManager;
+import drivermanager.DriverManagerFactory;
+import drivermanager.DriverType;
+import page.HomePage;
+import page.LoginPage;
+
+public class TestLogin {
+    static DriverManager driverManager;	
+    private WebDriver driver;
+    private LoginPage lp;
+    private HomePage hp;
+    
+	@BeforeTest
+	public static void beforeTest() {
+		driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
+	}
+	
+	@BeforeMethod
+	public void bbeforeMethod() throws Exception {
+        driver = DriverManager.
+        lp = new LoginPage(driver);
+	}
+
+	@Test
+	public void testLogin() throws Exception {
+        hp = lp.login("01655942566", "123456");
+        hp.assertLoginSucessfully();
+	}
+
+	@AfterTest
+	public void tearDown() throws Exception {
+        driverManager.quitDriver();
+	}
+}

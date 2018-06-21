@@ -1,0 +1,5 @@
+2018-Jun-20 22:07:25.198 INFO  LoginPage - Input 01655942566 into phone number field
+2018-Jun-20 22:07:25.787 INFO  LoginPage - Input 123456 into OTP field
+2018-Jun-20 22:07:25.956 INFO  LoginPage - Clicking login...
+2018-Jun-20 22:07:26.335 INFO  HomePage - Click on the user profile icon
+2018-Jun-20 22:07:26.336 INFO  HomePage - Verify the username

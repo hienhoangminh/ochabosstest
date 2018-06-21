@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="ocha-demo">
+
+    <test name="example1">
+	
+	<parameter name="browserName" value="chrome" />
+	<parameter name="poolsize" value="10" />
+		
+	<classes>
+	  <class name="testcase.TestLoginOchaBoss" />
+	</classes>
+		
+    </test>
+	
+</suite>

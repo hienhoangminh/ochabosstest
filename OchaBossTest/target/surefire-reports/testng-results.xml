@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite" duration-ms="14545" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:48:09Z">
+    <groups>
+    </groups>
+    <test name="Command line test" duration-ms="14545" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:48:09Z">
+      <class name="testcase.TestReportOchaBoss">
+        <test-method status="PASS" signature="OcularConfiguration()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="OcularConfiguration" is-config="true" duration-ms="12" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:47:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- OcularConfiguration -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="beforeMethod" is-config="true" duration-ms="3009" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:47:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="checkReport()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="checkReport" duration-ms="7765" started-at="2018-06-21T06:47:57Z" finished-at="2018-06-21T06:48:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkReport -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="afterMethod" is-config="true" duration-ms="178" started-at="2018-06-21T06:48:05Z" finished-at="2018-06-21T06:48:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=checkReport status=SUCCESS method=TestReportOchaBoss.checkReport()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- testcase.TestReportOchaBoss -->
+      <class name="testcase.TestLoginOchaBoss">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:testcase.TestLoginOchaBoss@12843fce]" name="beforeTest" is-config="true" duration-ms="3" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:47:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="beforeTest" is-config="true" duration-ms="0" started-at="2018-06-21T06:47:54Z" finished-at="2018-06-21T06:47:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:testcase.TestLoginOchaBoss@12843fce]" name="beforeMethod" is-config="true" duration-ms="1787" started-at="2018-06-21T06:48:05Z" finished-at="2018-06-21T06:48:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="loginOchaBoss()[pri:0, instance:testcase.TestLoginOchaBoss@12843fce]" name="loginOchaBoss" duration-ms="1592" started-at="2018-06-21T06:48:07Z" finished-at="2018-06-21T06:48:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginOchaBoss -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testcase.TestLoginOchaBoss@12843fce]" name="afterMethod" is-config="true" duration-ms="32" started-at="2018-06-21T06:48:09Z" finished-at="2018-06-21T06:48:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=loginOchaBoss status=SUCCESS method=TestLoginOchaBoss.loginOchaBoss()[pri:0, instance:testcase.TestLoginOchaBoss@12843fce] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:testcase.TestLoginOchaBoss@12843fce]" name="afterTest" is-config="true" duration-ms="85" started-at="2018-06-21T06:48:09Z" finished-at="2018-06-21T06:48:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:testcase.TestReportOchaBoss@13c78c0b]" name="afterTest" is-config="true" duration-ms="82" started-at="2018-06-21T06:48:09Z" finished-at="2018-06-21T06:48:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- testcase.TestLoginOchaBoss -->
+    </test> <!-- Command line test -->
+  </suite> <!-- Command line suite -->
+</testng-results>

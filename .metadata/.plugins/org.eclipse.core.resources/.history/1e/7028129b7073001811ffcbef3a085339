@@ -1,0 +1,37 @@
+package drivermanager;
+
+import org.openqa.selenium.WebDriver;
+
+public abstract class DriverManager {
+
+	protected static WebDriver driver;
+
+	protected static void startService() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected abstract void stopService();
+
+	protected static void createDriver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void quitDriver() {
+		if (null != driver) {
+			driver.quit();
+			driver = null;
+		}
+
+	}
+
+	public static WebDriver getDriver() {
+		if (null == driver) {
+			startService();
+			createDriver();
+		}
+		return driver;
+	}
+
+}

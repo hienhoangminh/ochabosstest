@@ -1,0 +1,131 @@
+package testcase;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+ // import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+import extentreports.ExtentManager;
+import page.HomePage;
+import page.LoginPage;
+
+public class TestLoginOchaBoss {
+
+	private static final Logger log = LogManager.getLogger(TestLoginOchaBoss.class.getName());
+	
+	WebDriver driver;
+	String baseUrl;
+
+	ExtentReports report;
+	ExtentTest test1;
+	
+	HomePage hp;
+	LoginPage lp;
+
+	@BeforeMethod
+	public void setUp() {
+		System.setProperty("webdriver.gecko.driver", "/Users/hoanghien/drivers/geckodriver");
+		driver = new FirefoxDriver();
+		
+		report = ExtentManager.GetExtent();
+		test1 = report.createTest("OchaBoss Login/Logout", "Verify Login sucessfully");
+		baseUrl = "https://boss.ocha.vn:83/";
+
+		test1.log(Status.INFO, "Browser started...");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		test1.log(Status.INFO, "Browser zoomed in to 1920*1080");
+		driver.get(baseUrl);
+		test1.log(Status.INFO, "Launching URL...");
+	}
+
+	@AfterMethod
+	public void tearDown(ITestResult testResult) throws InterruptedException {
+		if (testResult.getStatus() == ITestResult.FAILURE) {
+            String screenShot = takeScreenshot(driver,testResult.getMethod().getMethodName());
+	        try {
+				test1.log(Status.FAIL,"Screenshot from : " + screenShot).addScreenCaptureFromPath(screenShot);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		report.flush();
+		Thread.sleep(5000);
+		driver.close();
+	}
+
+	@Test
+	public void login_LKI() throws Exception {
+
+		WebElement loginSignUp = new WebDriverWait(driver, 10)
+				.until(ExpectedConditions.elementToBeClickable(By.id("comp-iiqg1vggactionTitle")));
+		loginSignUp.click();
+		test1.log(Status.INFO, "Clicking login/SingUp link...");
+
+		WebElement loginLink = new WebDriverWait(driver, 10)
+				.until(ExpectedConditions.elementToBeClickable(By.id("signUpDialogswitchDialogLink")));
+		loginLink.click();
+
+		WebElement loginButton = new WebDriverWait(driver, 10)
+				.until(ExpectedConditions.elementToBeClickable(By.id("memberLoginDialogokButton")));
+
+		WebElement memberEmail = driver.findElement(By.id("memberLoginDialogemailInputinput"));
+		memberEmail.sendKeys("test1@yopmail.com");
+
+		WebElement memberPassword = driver.findElement(By.id("memberLoginDialogpasswordInputinput"));
+		memberPassword.sendKeys("20702583");
+
+		loginButton.click();
+
+		Thread.sleep(5000);
+
+		WebElement welcomeText = null;
+
+		try {
+			welcomeText = driver.findElement(By.id("comp-iiqg1vggmemberTitle"));
+		} catch (Exception e) {
+			test1.log(Status.ERROR, "Element not existent! Please check UI again!");
+		}
+		
+		Assert.assertEquals(welcomeText.getText(),"Hello test1");
+        test1.log(Status.PASS, "Verify test completed!");
+	}
+
+//	public static String takeScreenshot(WebDriver driver,String fileName) {
+//		String extentReportImage = fileName + "_" +System.currentTimeMillis()
+//				+ ".png";
+//		String path =  System.getProperty("user.dir") + "/screenshot/";
+//		// Take screenshot and store as a file format
+//		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		try {
+//			// now copy the screenshot to desired location using copyFile method
+//			FileUtils.copyFile(src, new File(path + extentReportImage));
+//			return path + extentReportImage;
+//		} catch (IOException e) {
+//			System.out.println(e.getMessage());
+//			return "";
+//		}
+//	}
+	
+}

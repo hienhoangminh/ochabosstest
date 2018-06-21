@@ -1,0 +1,25 @@
+package database;
+
+import  java.sql.Connection;		
+import  java.sql.Statement;		
+import  java.sql.ResultSet;		
+import  java.sql.DriverManager;		
+import  java.sql.SQLException;	
+
+public class SQLConnector {
+
+	public Connection getConnection(String dbUrl,String userName,String password) throws ClassNotFoundException, SQLException {
+		Connection conn = null;
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		conn = DriverManager.getConnection(dbUrl, userName, password);
+		return conn;
+	}
+	
+	public List<String> getConnectTime(String dbUrl,String userName,String password){
+		String query = ""
+		Statement stmt = getConnection(dbUrl,userName,password).createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+	}
+	
+}

@@ -1,0 +1,70 @@
+package test;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class LoginToOchaBoss {
+
+	public static void main(String[] args) {
+		WebDriver driver;
+		System.setProperty("webdriver.chrome.driver", "/Users/hoanghien/drivers/chromedriver");
+		
+		driver = new ChromeDriver();
+		
+		driver.get("https://boss.ocha.vn:83/");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		WebElement phoneNumber = driver.findElement(By.name("mobile_number"));
+		phoneNumber.sendKeys("01655942566");
+		
+		WebElement sendOtpCode = driver.findElement(By.cssSelector("button[type='submit']"));
+		sendOtpCode.click();
+		
+		WebElement otpCode = new WebDriverWait(driver,15).until(ExpectedConditions.visibilityOfElementLocated(By.name("otp_code")));
+		otpCode.sendKeys("123456");
+		
+		WebElement buttonLogin = new WebDriverWait(driver, 15).
+				until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+		
+	    buttonLogin.click();
+	    //#user-info-dropdown-id .dropdown-content .owner-name
+	    Actions action = new Actions(driver);
+	    WebElement userInfo = new WebDriverWait(driver, 15).
+	    		until(ExpectedConditions.visibilityOfElementLocated(By.
+	    				cssSelector(".control-group.user-info")));
+	    action.moveToElement(userInfo).click().perform();
+	    
+	    
+	    WebElement userName = new WebDriverWait(driver, 15).
+				until(ExpectedConditions.
+						visibilityOfElementLocated(By.
+								cssSelector("#user-info-dropdown-id .dropdown-content .owner-name")));
+	    
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    String text = js.executeScript("arguments[0].innerText", userName).toString();
+		System.out.println(text);
+		
+//	    assertEquals(userName.getText(), "Hoàng Minh Hiển");
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	
+		driver.quit();
+	}
+	
+}

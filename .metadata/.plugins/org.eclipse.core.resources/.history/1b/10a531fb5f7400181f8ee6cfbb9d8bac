@@ -1,0 +1,75 @@
+package testcase;
+
+
+import java.util.concurrent.TimeUnit;
+
+ // import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+import extentreports.ExtentManager;
+import page.HomePage;
+import page.LoginPage;
+
+public class TestLoginOchaBoss {
+
+	private static final Logger log = LogManager.getLogger(TestLoginOchaBoss.class.getName());
+	
+	WebDriver driver;
+	String baseUrl;
+
+	ExtentReports report;
+	ExtentTest test1;
+	
+	HomePage hp;
+	LoginPage lp;
+
+	@BeforeMethod
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver", "/Users/hoanghien/drivers/chromedriver");
+		driver = new ChromeDriver();
+		
+		report = ExtentManager.GetExtent();
+		test1 = report.createTest("OchaBoss Login/Logout", "Verify Login sucessfully");
+		baseUrl = "https://boss.ocha.vn:83/";
+		
+		
+	    lp = new LoginPage(driver);
+
+		test1.log(Status.INFO, "Browser started...");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		test1.log(Status.INFO, "Browser zoomed in to 1920*1080");
+		driver.get(baseUrl);
+		test1.log(Status.INFO, "Launching URL...");
+	}
+
+	@Test
+	public void loginOchaBoss(){
+
+		hp = lp.login("01655942566", "123456");
+		//hp.assertLoginSucessfully();
+		
+		hp.clickOnUserInfo();
+		//hp.assertUserName();
+
+		hp.clickOnLogout();
+		lp = hp.clickConfirmLogout();
+	}
+	
+	@AfterTest
+	public void tearDown() throws Exception{
+		driver.quit();
+	}
+	
+}
